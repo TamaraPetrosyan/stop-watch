@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' href = 'style.css'>
+    <title>Stopwatch</title>
+</head>
+<body>
+    <section> 
+        <div>
+            <div class="secondsTimer">
+                <div id="hours">00</div>
+                <span class="endpoint">:</span>
+                <div id="minutes">00</div>
+                <span class="endpoint">:</span>
+                <div id="seconds">00</div>
+            </div>
+            <div class="mouseClick"> 
+                <button type="button" id ="start">Start</button>
+                <button type="button" id = "stop">Stop</button>
+                <button type="button"  id = "reset">Reset</button>
+            </div>
+         </div> 
+    </section> 
+    
+</body>
+    <script>
+        let hoursEl = document.getElementById('hours');
+        let minutesEl = document.getElementById('minutes');
+        let secondsEl = document.getElementById('seconds');
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+        let buttonStart = document.getElementById('start');
+        let buttonStop = document.getElementById('stop');
+        let buttonReset = document.getElementById('reset');
+        let timerWatch;
+        let isStarted = true;
+        
+        buttonStart.addEventListener('click', function(){
+            if(isStarted){
+                isStarted = false;
+                timer();
+            }
+        })
+        buttonReset.addEventListener('click',function(){
+            clearInterval(interval);
+            isStarted= true;
+            hoursEl.innerHTML ='00';
+            minutesEl.innerHTML = '00';
+            secondsEl.innerHTML = '00';
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+
+        })
+        buttonStop.addEventListener('click',function(){
+            clearInterval(interval);
+            isStarted=true;
+            
+        })
+        function timer(){
+            interval=setInterval(function(){
+                seconds++;
+            if(seconds === 60){
+                seconds = 0;
+                minutes++;
+            }
+            if(minutes ===60){
+                minutes = 0;
+                hours++;
+            }
+            hoursEl.innerHTML = hours < 10 ? '0' + hours : hours;
+            minutesEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            secondsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
+            },1000);
+        }
+    //     buttonStart.addEventListener('click', function(){
+    //     timerWatch = setInterval(() => {
+    //     seconds++;
+    //     if(seconds >= 60){
+    //             minutes++;
+    //             seconds= 0;
+    //         }
+    //         if(minutes >= 60){
+    //             hours++;
+    //             minutes =0;
+    //         }
+    //         if(seconds < 10) {
+    //             seconds = '0' + seconds;
+    //         }   
+    //     document.querySelector('.hours').innerHTML = hours;
+    //     document.querySelector('.minutes').innerHTML = minutes;
+    //     document.querySelector('.seconds').innerHTML = seconds;
+    //    }, 1000);
+    //    })
+       
+    //     buttonStop.addEventListener('click', function(){
+    //         clearInterval(timerWatch);
+    //     });
+    //     buttonReset.addEventListener('click', function(){  
+    //         seconds = 0;
+    //         minutes = 0;
+    //         hours = 0;
+    //         if(document.getElementById('stop').value == 'stop'){
+    //             document.getElementById('start').value = 'start';
+    //             clearTimeout(timerWatch);
+    //         }
+    //     });
+        
+    </script>
+
+</html>
